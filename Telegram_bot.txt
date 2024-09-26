@@ -1,0 +1,8 @@
+bot = telebot.Telebot('TOKEN')   # Создаёт объект бота 
+@bot.message_handler(...)   # Декоратор, который служит для обработки тех или иных сообщений
+@bot.message_handler(commands=['команда'])   # Декоратор, который служит для обработки команд 
+@bot.message_handler(content_types=['тип сообщений'])   # Декоратор, который служит для обработки сообщений 
+message.from_user.id   # Хранит в себе айди пользователя 
+bot.send_message(кому(айди), какое сообщение)
+bot.polling(non_stop=True)   # Запуск бота
+
