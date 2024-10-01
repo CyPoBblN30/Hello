@@ -1,0 +1,8 @@
+import telebot
+
+bot = telebot.TeleBot('TOKEN')
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    user_id = message.from_user.id
+    bot.send_message(user_id, 'Привет')
