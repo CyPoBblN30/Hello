@@ -1,3 +1,5 @@
+from gc import callbacks
+
 import telebot
 import database_registration as db
 import buttons_registration as bt
@@ -8,16 +10,22 @@ bot = telebot.TeleBot('7859920137:AAGXfWDvZJrVakrdvCQwmjxPLc6a3EVvj4M')
 def start(message):
     user_id = message.from_user.id
     if db.check_user(user_id):
-        bot.send_message(user_id, 'Здраствуйте!', reply_markup=telebot.types.ReplyKeyboardRemove())
+        bot.send_message(user_id, f'Здраствуйте!', reply_markup=telebot.types.ReplyKeyboardRemove())
     else:
         bot.send_message(user_id, 'Здраствуйте! Давайте начнём регистрацию!\nВвидете ваше имя!', reply_markup=telebot.types.ReplyKeyboardRemove())
-        bot.register_next_step_handler(message, get_name)
+        bot.register_next_step_handler(message, get_language)
 
 @bot.message_handler(commands=['help'])
 def help(message):
     user_id = message.from_user.id
     bot.send_message(user_id, 'Команда /start запускает бот\nБот регистрируей пользователей',  reply_markup=telebot.types.ReplyKeyboardRemove())
     bot.register_next_step_handler(message, start)
+
+def get_language(message):
+    user_id = message.from_user.id
+    bot.send_message(user_id, 'Выбирете язык', reply_markup=bt.language_buttons())
+    bot.register_next_step_handler(message, get_name)
+
 
 def get_name(message):
     user_id = message.from_user.id

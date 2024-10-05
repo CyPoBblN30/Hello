@@ -14,3 +14,12 @@ def location_button():
 
     return kb
 
+def language_buttons():
+    kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    but1 = types.InlineKeyboardButton('ru', callback_data='ru')
+    but2 = types.InlineKeyboardButton('uz', callback_data='uz')
+    kb.add(but1, but2)
+
+    return kb
+
+
